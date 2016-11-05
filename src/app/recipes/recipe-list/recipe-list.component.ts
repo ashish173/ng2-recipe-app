@@ -9,7 +9,13 @@ import { Recipe } from '../recipe';
 })
 export class RecipeListComponent implements OnInit {
   @Output() recipeSelected = new EventEmitter<Recipe>();
-  recipe = new Recipe('Dummy', 'dummy', 'http://placehold.it/50x50');
+  // recipe = new Recipe('Dish1', 'Very yummy Dish1', '../../../assets/dish1.jpeg');
+
+  recipes: Recipe[] = [
+    new Recipe('Dish 1', 'Very tasty dish 1', '../../../assets/dish1.jpeg', []),
+    new Recipe('Dish 2', 'Very tasty dish 2', '../../../assets/dish2.jpeg', []),
+    new Recipe('Dish 3', 'Very tasty dish 3', '../../../assets/dish3.jpeg', [])
+  ];
 
   constructor() { }
 
