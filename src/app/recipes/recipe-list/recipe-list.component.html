@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-xs-12">
     <ul class="list-group">
-      <app-recipe-item [recipe]='recipe'></app-recipe-item>
+      <app-recipe-item (click)="onSelected(recipe)" [recipe]='recipe'></app-recipe-item>
     </ul>
   </div>
 </div>
