@@ -1,8 +1,36 @@
 <div class="row">
-  <div class="col-xs-6">
-    <!--<input value="third"></input>-->
-  </div>
-  <div class="col-xs-6">
-    <!--<input value="second"></input>    -->
+  <div class="col-xs-12">
+    <form id='shoppping-list-add' (ngSubmit)="onSubmit(f.value)" #f='ngForm'>
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="item-name">Name</label>
+          <input 
+            type="text" 
+            id="item-name" 
+            class="form-control"
+            required
+            ngModel
+            name="name">  
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="item-amount">Amount</label>
+          <input 
+            type="text" 
+            class="form-control"
+            id="item-amount" 
+            required
+            ngModel
+            name="amount">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-primary" type="submit" *ngIf="isAdd" [disabled]='!f.valid'>Add</button> 
+          <button class="btn btn-danger" type="submit" *ngIf="!isAdd" [disabled]='!f.valid'>Save</button> 
+          <button class="btn btn-danger" type="button" *ngIf="!isAdd">Delete</button> 
+          <button class="btn btn-info" type="button" *ngIf="!isAdd">Clear</button> 
+        </div>
+      </div>
+    </form>
   </div>
 </div>
