@@ -50,10 +50,12 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     );
   }
 
+  // build in lifecycle hook
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
+  // Create new and edit recipe form submit 
   onSubmit() {
     const newRecipe = this.recipeForm.value;
     if (this.isNew) {
@@ -64,16 +66,38 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     this.navigateBack();
   }
 
+  // Gets called on cancel button on edit and create forms
   onCancel() {
     this.navigateBack();
   }
 
+  // Removes ingredients from a recipe
+  onDeleteItem(index: number) {
+    (<FormArray>this.recipeForm.controls['ingredient']).removeAt(index);
+  }
+
+  // Adds new ingredient to a recipe
+  onAddItem(name: string, amount: string) {
+    (<FormArray>this.recipeForm.controls['ingredient']).push(
+      new FormGroup({ 
+        'name': new FormControl(name, Validators.required),
+        'amount': new FormControl(amount, [
+          Validators.required,
+          Validators.pattern('\\d+')
+        ])
+      })
+    )
+  }
+
+  // Just go one step back
   private navigateBack() {
     this.router.navigate(['../']);
   }
 
+  // redundant code
   get ingredients(): FormArray { return this.recipeForm.get('ingredients') as FormArray; }
 
+  // New form initialisation for EDIT/NEW Recipe
   private initForm() {
     // vars
     let recipeName = '';
@@ -111,7 +135,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       // We don't want that instead it should be FormArray type whose controls could be fetched
     });
     console.log('Recipe form controls', this.recipeForm.controls);
-    window['test'] = this.recipeForm;
+    // window['test'] = this.recipeForm; // debugging purpose code clean later
   }
 
 
