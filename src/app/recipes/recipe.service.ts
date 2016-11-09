@@ -1,4 +1,6 @@
+import { RecipesComponent } from './recipes.component';
 import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
 
 import { Ingredient } from '../shared/ingredient';
 import { Recipe } from './recipe';
@@ -20,7 +22,7 @@ export class RecipeService {
     ])
   ];
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   getRecipes() {
     return this.recipes;
@@ -43,6 +45,18 @@ export class RecipeService {
 
   editRecipe(oldRecipe: Recipe, newRecipe: Recipe) {
     this.recipes[this.recipes.indexOf(oldRecipe)] = newRecipe;
+  }
+
+  storeData() {
+    const body = JSON.stringify(this.recipes);
+    const headers = new Headers({
+      'Content-Type': 'application/json' 
+    });
+    return this.http.post('https://recipebook-15d53.firebaseio.com/recipes.json', body, {headers: headers});
+  }
+
+  fetchData() {
+
   }
 
 }
