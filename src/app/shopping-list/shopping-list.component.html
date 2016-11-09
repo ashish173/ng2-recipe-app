@@ -3,7 +3,7 @@
     <app-shopping-list-add [item]="selectedItem" (cleared)="onCleared()"></app-shopping-list-add>
     <hr>
     <ul class="list-group">
-      <a *ngFor="let item of items" (click)="onSelectItem(item)" class="list-group-item" style="...">{{item.name}} ({{item.amount}})</a>
+      <a *ngFor="let item of items" (click)="onSelectItem(item)" class="list-group-item link" style="...">{{item.name}} ({{item.amount}})</a>
     </ul>
   </div>
 </div>
